@@ -53,10 +53,32 @@ gitRouter.patch("/update/:id" , async(req,res)=>{
     }
 })
 /* sort logic*/
-gitRouter.get("/sort/:created_at", async(req,res)=>{
+gitRouter.get("/sort/size", async(req,res)=>{
+    
+    try {
+        const githube = await Githubes.find().sort({size:1})
+    
+        return res.status(200).send(githube)
+     }
+     catch(err){
+          return res.status(500).send({message:err.message})
+     }
+})
+gitRouter.get("/sort/created", async(req,res)=>{
     
     try {
         const githube = await Githubes.find().sort({created_at:1})
+    
+        return res.status(200).send(githube)
+     }
+     catch(err){
+          return res.status(500).send({message:err.message})
+     }
+})
+gitRouter.get("/sort/updated", async(req,res)=>{
+    
+    try {
+        const githube = await Githubes.find().sort({updated_at:1})
     
         return res.status(200).send(githube)
      }
